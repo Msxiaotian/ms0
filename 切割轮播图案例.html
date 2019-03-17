@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .vet {
+        width: 560px;
+        height: 300px;
+        margin: 100px auto;
+        background-color: #ccc;
+        position: relative;
+      }
+
+      ul {
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        transform-style: preserve-3d;
+        /* transform: rotate3d(1,1,0,-30deg); */
+        position: relative;
+      }
+
+      ul > li {
+        width: 20%;
+        height: 100%;
+        float: left;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s;
+      }
+
+      ul > li > span {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform-style: preserve-3d;
+        top: 0;
+        left: 0;
+      }
+
+      ul > li > span:nth-of-type(1) {
+        background: url("images/q1.jpg");
+        transform: translateZ(150px);
+      }
+
+      ul > li > span:nth-of-type(2) {
+        background: url("images/q2.jpg");
+        transform: translateY(-150px) rotateX(90deg);
+      }
+
+      ul > li > span:nth-of-type(3) {
+        background: url("images/q3.jpg");
+        transform: translateZ(-150px) rotateX(180deg);
+      }
+
+      ul > li > span:nth-of-type(4) {
+        background: url("images/q4.jpg");
+        transform: translateY(150px) rotateX(-90deg);
+      }
+
+      ul > li:nth-of-type(2) > span {
+        background-position: -100% 0;
+      }
+
+      ul > li:nth-of-type(3) > span {
+        background-position: -200% 0;
+      }
+
+      ul > li:nth-of-type(4) > span {
+        background-position: -300% 0;
+      }
+
+      ul > li:nth-of-type(5) > span {
+        background-position: -400% 0;
+      }
+
+      .left,
+      .right {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 50%;
+        text-align: center;
+        line-height: 50px;
+        text-decoration: none;
+        font-size: 30px;
+        transform: translate(0, -50%);
+      }
+
+      .left {
+        left: 0;
+      }
+
+      .right {
+        right: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="vet">
+      <ul>
+        <li>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </li>
+      </ul>
+      <a href="javascript:;" class="left">&lt;</a>
+      <a href="javascript:;" class="right">&gt;</a>
+    </div>
+    <script>
+      window.onload = function() {
+        var num = 0;
+        var flag = true;
+        var lis = document.querySelectorAll("li");
+        document.querySelector(".right").onclick = function() {
+          if (flag) {
+            num--;
+            flag = false;
+            lis.forEach((item, index) => {
+              lis[index].style.transform = "rotateX(" + num * 90 + "deg)";
+              lis[index].style.transitionDelay = index * 0.1 + "s";
+            });
+            lis[lis.length - 1].addEventListener(
+              "webkitTransitionEnd",
+              function() {
+                flag = true;
+              }
+            );
+          }
+        };
+
+        document.querySelector(".left").onclick = function() {
+          if (flag) {
+            num++;
+            flag = false;
+            lis.forEach((item, index) => {
+              lis[index].style.transform = "rotateX(" + num * 90 + "deg)";
+              lis[index].style.transitionDelay = index * 0.1 + "s";
+            });
+
+            lis[lis.length - 1].addEventListener(
+              "webkitTransitionEnd",
+              function() {
+                flag = true;
+              }
+            );
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+王脒 20:57:15
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 560px;
+            height: 300px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .box ul {
+            width: 100%;
+            height: 100%;
+            list-style: none;
+            /* background-color: #ccc; */
+            /* transform: rotate3d(1,1,0,-30deg); */
+            transform-style: preserve-3d;
+        }
+
+        .box ul li {
+            float: left;
+            width: 20%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .box li span {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        ul li>span:nth-of-type(1) {
+            background: url(images/q1.jpg);
+            transform: translateZ(150px);
+        }
+
+        ul li>span:nth-of-type(2) {
+            background: url(images/q2.jpg);
+            transform: translateY(-150px) rotateX(90deg);
+        }
+
+        ul li>span:nth-of-type(3) {
+            background: url(images/q3.jpg);
+            transform: translateZ(-150px) rotateX(180deg);
+        }
+
+        ul li>span:nth-of-type(4) {
+            background: url(images/q4.jpg);
+            transform: translateY(150px) rotateX(-90deg);
+        }
+
+        ul li:nth-of-type(2) span {
+            background-position-x: -100%;
+        }
+
+        ul li:nth-of-type(3) span {
+            background-position-x: -200%;
+        }
+
+        ul li:nth-of-type(4) span {
+            background-position-x: -300%;
+        }
+
+        ul li:nth-of-type(5) span {
+            background-position-x: -400%;
+        }
+
+        .box>div {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            background-color: rgba(0, 0, 0, .3);
+            font-size: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            transform: translateY(-50%);
+            cursor: pointer;
+
+        }
+
+        .box .pre {
+            left: 0;
+        }
+
+        .box .next {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+        </ul>
+        <div class="pre">&lt;</div>
+        <div class="next">&gt;</div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var next = document.querySelector('.next');
+            var pre = document.querySelector('.pre');
+            var lis = document.querySelectorAll('li');
+            var num = 0;
+            var flag = true;
+            next.onclick = function () {
+                if (flag) {
+                    flag = false;
+                    num--;
+                    lis.forEach(function (item, index) {
+                        lis[index].style.transform = 'rotateX(' + num * 90 + 'deg)';
+                        lis[index].style.transitionDelay = index * 0.1 + 's';
+                    })
+                }
+                lis[lis.length - 1].addEventListener('transitionend', function () {
+                    flag = true;
+                })
+            }
+            pre.onclick = function () {
+                if (flag) {
+                    flag = false;
+                    num++;
+                    lis.forEach(function (item, index) {
+                        lis[index].style.transform = 'rotateX(' + num * 90 + 'deg)';
+                        lis[index].style.transitionDelay = index * 0.1 + 's';
+                    })
+                }
+                lis[lis.length - 1].addEventListener('transitionend', function () {
+                    flag = true;
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>
